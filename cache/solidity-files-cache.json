@@ -998,8 +998,8 @@
       ]
     },
     "/home/sd51481/Music/my-nft/Ethereum-SmartContracts/contracts/SumanNFT.sol": {
-      "lastModificationDate": 1652950222839,
-      "contentHash": "5f268a5cbe3ddda096a8b2519a4eaf62",
+      "lastModificationDate": 1652957195901,
+      "contentHash": "443630c6d532947775eb51dda2d0ee94",
       "sourceName": "contracts/SumanNFT.sol",
       "solcConfig": {
         "version": "0.8.1",
@@ -1038,8 +1038,8 @@
       ]
     },
     "/home/sd51481/Music/my-nft/Ethereum-SmartContracts/contracts/PS.sol": {
-      "lastModificationDate": 1652955177929,
-      "contentHash": "89ec2756fda1c4cecafad03efa8c11ab",
+      "lastModificationDate": 1652966927622,
+      "contentHash": "b5b51c24f42c16852fd8c85e5cf8c397",
       "sourceName": "contracts/PS.sol",
       "solcConfig": {
         "version": "0.8.1",
@@ -1066,10 +1066,8 @@
       },
       "imports": [
         "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
         "@openzeppelin/contracts/utils/Counters.sol",
         "@openzeppelin/contracts/access/Ownable.sol",
-        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
         "@openzeppelin/contracts/security/Pausable.sol"
       ],
       "versionPragmas": [
