@@ -10,30 +10,25 @@ contract PS is  ERC721Enumerable, Ownable, Pausable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     string public _baseTokenURI = "https://api.coolcatsnft.com/cat/";
-    address private admin = 0xb55Fd66a86612976d79010C2F6B90275b241F1f8;
-    uint256 private _amount = 0.0003 ether;
-
-    address public user;
-    
-    mapping (address => uint) public balances;
-
-    event Sent(address from, address to, uint amount);
-
+    address private _owner = address(uint160(0xb55Fd66a86612976d79010C2F6B90275b241F1f8));
+    uint256 private _ethAmount = 0.0003 ether;
+   
     constructor() ERC721("PS", "PSt") {
-        user = msg.sender;
     }
  
     
     //this function will allow the user to perform mint ops upto token ID 30
     // user also need to send 0.0003 Ether to admin during mint ops 
     function mintNFTForUser(address recipient)
-        public whenNotPaused returns (uint256) 
+        public payable whenNotPaused returns (uint256) 
     {
+        
+         sendEther();
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-        require(totalSupply()<31,"Error - 30 NFT already minted");
+        require(totalSupply()<31,"Error - 30 NFT already minted. !!");
         _mint(recipient, newItemId);
-        send(admin,_amount);
+
         return newItemId;
     } 
 
@@ -65,12 +60,10 @@ contract PS is  ERC721Enumerable, Ownable, Pausable {
     function setBaseURI(string memory baseURI) public onlyOwner {
         _baseTokenURI = baseURI;
     }
-
-    function send(address receiver, uint amount) public {
-        require(amount < balances[msg.sender],"Insufficient Balance!!");
-        balances[msg.sender] -= amount;
-        balances[receiver] += amount;
-        emit Sent(msg.sender, receiver, amount);
+    
+    function sendEther() public payable{
+         address payable _admin = payable(_owner);
+        _admin.transfer(_ethAmount);
     }
 
 }
