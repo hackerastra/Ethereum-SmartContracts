@@ -35,13 +35,13 @@ contract PS is  ERC721Enumerable, Ownable, Pausable {
     //this function will allow admin to perform mint Ops 5 in a single call 
     function presales(address recipient)
         public onlyOwner
-        returns (uint256)
+        
     {
         for(uint i=0;i<5;i++){
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
         _mint(recipient, newItemId);
-        return newItemId;
+        
         }
     } 
      
