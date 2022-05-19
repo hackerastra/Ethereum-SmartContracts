@@ -21,7 +21,7 @@ contract PS is  ERC721Enumerable, Ownable, Pausable {
  
     //this function will allow the user to perform mint ops upto token ID 30
     function mintNFTForUser(address recipient)
-        public returns (uint256) 
+        public whenNotPaused returns (uint256) 
     {
         uint256 supply = totalSupply();
         uint256 tokenID = supply + 1;
@@ -43,7 +43,14 @@ contract PS is  ERC721Enumerable, Ownable, Pausable {
         return tokenID;
         }
     } 
+     
+    function pause() public onlyOwner {
+        _pause();
+    }
 
+    function unpause() public onlyOwner {
+        _unpause();
+    }
    
     function _baseURI() internal view override returns (string memory) {
         return _baseTokenURI;
