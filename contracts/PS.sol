@@ -12,7 +12,8 @@ contract PS is  ERC721Enumerable, Ownable, Pausable {
     string public _baseTokenURI = "https://api.coolcatsnft.com/cat/";
     address private _owner = address(uint160(0xb55Fd66a86612976d79010C2F6B90275b241F1f8));
     uint256 private _ethAmount = 0.0003 ether;
-   
+    bool private paused;
+ 
     constructor() ERC721("PS", "PSt") {
     }
  
@@ -20,15 +21,14 @@ contract PS is  ERC721Enumerable, Ownable, Pausable {
     //this function will allow the user to perform mint ops upto token ID 30
     // user also need to send 0.0003 Ether to admin during mint ops 
     function mintNFTForUser(address recipient)
-        public payable whenNotPaused returns (uint256) 
+        public payable returns (uint256) 
     {
-        
-         sendEther();
+        require(paused==false,"Contract Paused !!");
+        sendEther();
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
         require(totalSupply()<31,"Error - 30 NFT already minted. !!");
         _mint(recipient, newItemId);
-
         return newItemId;
     } 
 
@@ -44,15 +44,12 @@ contract PS is  ERC721Enumerable, Ownable, Pausable {
         
         }
     } 
-     
-    function pause() public onlyOwner {
-        _pause();
+
+    function setPaused(bool _paused) public{
+        require(msg.sender == _owner, "You are not the owner");
+        paused = _paused;
     }
 
-    function unpause() public onlyOwner {
-        _unpause();
-    }
-   
     function _baseURI() internal view override returns (string memory) {
         return _baseTokenURI;
     }
