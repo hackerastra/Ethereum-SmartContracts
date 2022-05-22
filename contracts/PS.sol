@@ -15,14 +15,13 @@ contract PS is  ERC721Enumerable, Ownable, ReentrancyGuard, Pausable{
     }
  
     //this function will allow the user to perform mint ops upto token ID 30
-    // user also need to send 0.0003 Ether to admin during mint ops 
     function mintNFTForUser() external payable nonReentrant whenNotPaused{
         require(getBalance(msg.sender) > msg.value,"Error");
         (bool sent,) = owner().call{value: msg.value}("");
         require(sent, "Failed to Send Ethers");
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-        require(newItemId < 51, "Limit Reached");
+        require(newItemId < 31, "Limit Reached");
         _safeMint(msg.sender, newItemId);
     }
 
