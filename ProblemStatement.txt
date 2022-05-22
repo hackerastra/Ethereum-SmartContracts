@@ -1,1 +1,0 @@
-Problem Statement: Allow users to mint 30 tokens using a mint function. Admin should be able to pause and unpause mint function. Admin should be able to add 5 tokens to their account at any point through a function named presales. Total supply will be 35.
