@@ -7,10 +7,10 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
 const web3 = createAlchemyWeb3(API_URL)
 
 const contract = require("../artifacts/contracts/PS.sol/PS.json")
-const contractAddress = "0xE93C817Ed22EA606B2a948C1536013013F34DBB9"
+const contractAddress = process.env.CONTRACT_ADDRESS
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
 
-async function mintNFT(tokenURI) {
+async function mintNFT() {
   const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, "latest") //get latest nonce
 
   //the transaction
@@ -19,7 +19,7 @@ async function mintNFT(tokenURI) {
     to: contractAddress,
     nonce: nonce,
     gas: 5000000,
-    data: nftContract.methods.presales(PUBLIC_KEY).encodeABI(),
+    data: nftContract.methods.presales().encodeABI(),
   }
 
   const signPromise = web3.eth.accounts.signTransaction(tx, PRIVATE_KEY)
@@ -48,6 +48,4 @@ async function mintNFT(tokenURI) {
     })
 }
 
-mintNFT(
-  "ipfs://QmaL8L6s7NDdVmygeCVuiFVrZ3nuh7wFmrFDckzF1acep1"
-)
+mintNFT()
