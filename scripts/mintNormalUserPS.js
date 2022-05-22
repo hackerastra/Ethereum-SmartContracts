@@ -1,7 +1,7 @@
 require("dotenv").config()
 const API_URL = process.env.API_URL
-const PUBLIC_KEY = process.env.NORMAL_ACC_PUBLIC_KEY
-const PRIVATE_KEY = process.env.NORMAL_ACC_PRIVATE_KEY
+const PUBLIC_KEY = process.env.Test
+const PRIVATE_KEY = process.env.TestPass
 
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
 const web3 = createAlchemyWeb3(API_URL)

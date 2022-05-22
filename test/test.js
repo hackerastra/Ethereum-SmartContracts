@@ -1,7 +1,5 @@
 // We import Chai to use its asserting functions here.
 const { expect } = require("chai");
-const { resolveProperties } = require("ethers/lib/utils");
-
 
 describe("Token contract", function () {
   
